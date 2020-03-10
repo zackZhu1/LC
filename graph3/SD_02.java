@@ -98,6 +98,7 @@ public class test {
 // 3. connected
 // pick any 2 of these 
 
+// solution1: 1, 3 -> tree
 class Solution {
     public boolean validTree(int n, int[][] edges) {
 
@@ -140,4 +141,52 @@ class Solution {
     }
 }
 
+// solution2: 1, 2 -> tree
+class Solution {
+    public boolean validTree(int n, int[][] edges) {
+        int number_of_edges = edges.length;
+        if (number_of_edges + 1 != n) return false;
+        
+        List<List<Integer>> graph = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            graph.add(i, new ArrayList<>());
+        }
+        
+        for (int i = 0; i < edges.length; i++) {
+            int u = edges[i][0], v = edges[i][1];
+            graph.get(u).add(v);
+            graph.get(v).add(u);
+        }
+        
+        // first check: no cycle 
+        Set<Integer> visited = new HashSet<>();
+        for (int i = 0; i < n; i++) { // for each potential subcomponent
+            if (!visited.contains(i) && hasCycle(graph, i, -1, visited)) {
+                return false;
+            }
+        }
+
+        // // second check: connected
+        // if (visited.size() != graph.size()) {
+        //     return false;
+        // }
+        
+        return true;
+    }
+    
+    boolean hasCycle(List<List<Integer>> graph, int node, int parent, Set<Integer> visited) {
+        if (visited.contains(node)) {
+            return true;
+        }
+        
+        visited.add(node);
+        for (int i = 0; i < graph.get(node).size(); i++) {
+            int nei = graph.get(node).get(i);
+            if (nei != parent && hasCycle(graph, nei, node, visited)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
 
