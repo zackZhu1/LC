@@ -8,7 +8,7 @@ public int getLongestDepth(int[] array) {
 		if (array[i] == -1) {
 			rootList.add(i);
 		} else {
-			if (!map.containsKey(i)) {
+			if (!map.containsKey(array[i])) {
 				map.put(array[i], new ArrayList<>());
 			}
 			map.get(array[i]).add(i);
@@ -69,6 +69,7 @@ public int getLongestDepth3(int[] nodes) {
 	return globalMax;
 }
 
+// mark visited 2
 private int dfs(int i, int[] depths, int[] nodes) {
 	if (i == -1) return 0;
 	// unvisited: 0; visiting: -1; visited: > 0

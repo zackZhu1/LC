@@ -160,7 +160,7 @@ class Solution {
         
         // first check: no cycle 
         Set<Integer> visited = new HashSet<>();
-        for (int i = 0; i < n; i++) { // for each potential subcomponent
+        for (int i = 0; i < n; i++) { // for each potential subcomponent e.g. [0], [1,2,3]
             if (!visited.contains(i) && hasCycle(graph, i, -1, visited)) {
                 return false;
             }

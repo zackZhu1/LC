@@ -40,7 +40,7 @@ class Solution {
                 map.put(nei, new Node(nei.val));
                 dfs(nei, map);
             }
-            map.get(node).neighbors.add(map.get(nei)); // node.neighbors.add(nei)
+            map.get(node).neighbors.add(map.get(nei)); // 此时node必须在map里 所以map.put(node,..)
         }
     }
 }

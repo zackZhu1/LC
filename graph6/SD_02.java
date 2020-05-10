@@ -122,7 +122,6 @@ public class test {
 			visited.add(curNode);
 			curPath.add(curNode);
 			List<Integer> path = new ArrayList<>(curPath); // deep copy
-			Collections.reverse(path);
 			allPaths.add(path);
 			
 			curPath.remove(curPath.size() - 1);
@@ -132,7 +131,8 @@ public class test {
 		
 		visited.add(curNode);
 		curPath.add(curNode);
-		for (Integer nei : graph.get(curNode)) {
+		for (Integer nei : graph.get(curNode)) {  // generate
+			if (visited.contains(nei)) continue;
 			dfs3(curPath, allPaths, nei, goal, visited, maximumLevel, curLevel + 1);
 		}
 		curPath.remove(curPath.size() - 1);
